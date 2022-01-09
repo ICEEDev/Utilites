@@ -695,6 +695,34 @@ do
                 end);
             end;
 
+            function T2:AddButton(options)
+                options = options or {
+                    Text        = "";
+                    Callback    = function() end;
+                };
+
+                -- TextButton
+                local TextButtonThingy = library:Create("TextButton", {
+                    Parent                  = Container;
+                    BackgroundColor3        = Color3.new(0.0941176, 0.0941176, 0.0941176);
+                    BorderColor3            = Color3.new(0.12549, 0.12549, 0.12549);
+                    BackgroundTransparency  = 0;
+                    Size                    = UDim2.new(1, -14, 0, 32);
+                    TextTransparency        = 0;
+                    Font                    = Enum.Font.SourceSansSemibold;
+                    Text                    = options.Text;
+                    TextColor3              = Color3.new(0.921569, 0.921569, 0.921569);
+                    TextSize                = 15;
+                    TextXAlignment          = Enum.TextXAlignment.Center;
+                    AutoButtonColor         = true;
+                });
+
+                -- Connection
+                TextButtonThingy.MouseButton1Click:Connect(function()
+                    options.Callback();
+                end);
+            end;
+
             return T2;
         end;
     end;
@@ -747,6 +775,13 @@ tab:AddSlider({
     Def     = 1;
     Callback = function(value)
         print(value);
+    end;
+});
+
+tab:AddButton({
+    Text    = "test";
+    Callback = function()
+        print("hi");
     end;
 });]]
 
